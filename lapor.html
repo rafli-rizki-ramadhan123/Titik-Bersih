@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lapor Sampah | TitikBersih</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #e0f2f1;
+      color: #004d40;
+    }
+
+    .navbar {
+      background-color: #00796b;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+
+    .nav-links a {
+      color: white;
+      margin-left: 1rem;
+      text-decoration: none;
+    }
+
+    .header {
+      padding: 2rem 1rem;
+      text-align: center;
+      background-color: #b2dfdb;
+    }
+
+    form {
+      max-width: 600px;
+      margin: 2rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: 600;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    #map {
+      height: 300px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    button {
+      width: 100%;
+      background-color: #00796b;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #00695c;
+    }
+
+    footer {
+      background-color: #00796b;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 3rem;
+    }
+
+    .back-link {
+      text-align: center;
+      display: block;
+      margin-top: 1rem;
+      font-weight: bold;
+      color: #00796b;
+      text-decoration: none;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="logo">
+      <img src="logo.jpg" alt="Logo" style="height: 32px; vertical-align: middle; margin-right: 8px;">
+      <span>TitikBersih</span>
+    </div>
+    <div class="nav-links">
+      <a href="beranda.html">Beranda</a>
+      <a href="layanan.html">Layanan</a>
+      <a href="peta.html">Peta</a>
+    </div>
+  </div>
+
+  <div class="header">
+    <h2>Lapor Sampah</h2>
+    <p>Bantu jaga lingkungan dengan melaporkan titik sampah liar.</p>
+  </div>
+
+  <form action="proses_laporan.php" method="POST" enctype="multipart/form-data">
+    <label for="foto">Unggah Foto:</label>
+    <input type="file" id="foto" name="foto" accept="image/*" required>
+
+    <label for="lokasi">Titik Lokasi Penumpukan:</label>
+    <div id="map"></div>
+    <input type="hidden" id="lat" name="lat">
+    <input type="hidden" id="lng" name="lng">
+
+    <label for="deskripsi">Deskripsi (opsional):</label>
+    <textarea id="deskripsi" name="deskripsi" rows="4" placeholder="Ceritakan sedikit tentang lokasi ini..."></textarea>
+
+    <button type="submit">Kirim Laporan</button>
+  </form>
+
+  <a href="beranda.html" class="back-link">← Kembali ke Beranda</a>
+
+  <footer>
+    &copy; 2025 TitikBersih. Semua hak dilindungi.
+  </footer>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    const map = L.map('map').setView([-6.200000, 106.816666], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap'
+    }).addTo(map);
+
+    let marker;
+    map.on('click', function(e) {
+      const { lat, lng } = e.latlng;
+      document.getElementById('lat').value = lat;
+      document.getElementById('lng').value = lng;
+
+      if (marker) {
+        marker.setLatLng([lat, lng]);
+      } else {
+        marker = L.marker([lat, lng]).addTo(map);
+      }
+    });
+  </script>
+  
+  <script>
+  // Ambil parameter dari URL (status=success atau status=error)
+  const params = new URLSearchParams(window.location.search);
+  const status = params.get('status');
+
+  if (status) {
+    const notif = document.createElement("div");
+    notif.textContent = status === "success" ? "✅ Laporan berhasil dikirim!" : "❌ Gagal mengirim laporan.";
+    notif.style.position = "fixed";
+    notif.style.bottom = "30px";
+    notif.style.left = "50%";
+    notif.style.transform = "translateX(-50%)";
+    notif.style.backgroundColor = status === "success" ? "#4caf50" : "#f44336";
+    notif.style.color = "white";
+    notif.style.padding = "12px 24px";
+    notif.style.borderRadius = "8px";
+    notif.style.fontWeight = "bold";
+    notif.style.zIndex = "9999";
+    notif.style.boxShadow = "0 4px 10px rgba(0,0,0,0.2)";
+    document.body.appendChild(notif);
+
+    // Hilangkan notifikasi setelah 3 detik
+    setTimeout(() => {
+      notif.remove();
+      history.replaceState(null, "", window.location.pathname); // hapus parameter URL
+    }, 3000);
+  }
+  </script>
+
+</body>
+</html>

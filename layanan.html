@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Layanan | TitikBersih</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif; margin: 0; background: #fff; color: #004d40;
+    }
+    .navbar {
+      background-color: #004d40; padding: 1rem 2rem; display: flex; justify-content: space-between; color: white;
+    }
+    .nav-links a {
+      color: white; margin-left: 1rem; text-decoration: none;
+    }
+    .header {
+      padding: 3rem 1rem; text-align: center; background: #e8f5e9;
+    }
+    .services-grid {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; padding: 2rem;
+    }
+    .card {
+      background: #f1f8e9; border: 2px solid #c8e6c9; border-radius: 12px;
+      padding: 1.5rem; width: 250px; text-align: center;
+      text-decoration: none; color: inherit;
+      transition: 0.3s all ease;
+    }
+    .card:hover {
+      background-color: #dcedc8;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+    .card img {
+      width: 64px; height: 64px;
+    }
+    .card h3 {
+      color: #1b5e20; margin-top: 1rem;
+    }
+    footer {
+      background-color: #004d40; color: white; text-align: center; padding: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="logo">TitikBersih</div>
+    <div class="nav-links">
+      <a href="beranda.html">Beranda</a>
+      <a href="layanan.html">Layanan</a>
+      <a href="peta.html">Peta</a>
+    </div>
+  </div>
+
+  <div class="header">
+    <h1>Layanan TitikBersih</h1>
+    <p>Pilih layanan terbaik sesuai kebutuhan lingkunganmu.</p>
+  </div>
+
+  <div class="services-grid">
+    <a href="lapor.html" class="card">
+      <img src="https://img.icons8.com/fluency/96/000000/trash.png" />
+      <h3>Lapor Sampah</h3>
+      <p>Laporkan sampah yang mengganggu di sekitarmu.</p>
+    </a>
+
+    <a href="edukasi.html" class="card">
+      <img src="https://img.icons8.com/fluency/96/000000/classroom.png" />
+      <h3>Edukasi</h3>
+      <p>Pelajari cara bijak mengelola sampah dan lingkungan.</p>
+    </a>
+
+    <a href="peta.html" class="card">
+      <img src="https://img.icons8.com/fluency/96/000000/map.png" />
+      <h3>Lihat Peta</h3>
+      <p>Lihat semua titik sampah yang telah dilaporkan warga.</p>
+    </a>
+  </div>
+
+  <footer>&copy; 2025 TitikBersih. Semua hak dilindungi.</footer>
+</body>
+</html>

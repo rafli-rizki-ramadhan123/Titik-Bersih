@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Peta Titik Sampah | TitikBersih</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #e0f2f1;
+      color: #004d40;
+    }
+
+    .navbar {
+      background-color: #00796b;
+      padding: 1rem 2rem;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+
+    .nav-links a {
+      color: white;
+      margin-left: 1rem;
+      text-decoration: none;
+    }
+
+    .header {
+      padding: 2rem 1rem;
+      text-align: center;
+      background-color: #b2dfdb;
+    }
+
+    #map {
+      height: 80vh;
+      width: 100%;
+    }
+
+    footer {
+      background-color: #00796b;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="logo">
+      <img src="logo.jpg" alt="Logo" style="height: 32px; vertical-align: middle; margin-right: 8px;">
+      <span>TitikBersih</span>
+    </div>
+    <div class="nav-links">
+      <a href="beranda.html">Beranda</a>
+      <a href="layanan.html">Layanan</a>
+      <a href="peta.html">Peta</a>
+    </div>
+  </div>
+
+  <div class="header">
+    <h2>Peta Titik Sampah</h2>
+    <p>Menampilkan titik-titik penumpukan sampah yang telah divalidasi.</p>
+  </div>
+
+  <div id="map"></div>
+
+  <footer>
+    &copy; 2025 TitikBersih. Semua hak dilindungi.
+  </footer>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    const map = L.map('map').setView([-6.200000, 106.816666], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    fetch('data_laporan.php')
+      .then(response => response.json())
+      .then(data => {
+        data.forEach(item => {
+          const marker = L.marker([item.latitude, item.longitude]).addTo(map);
+          marker.bindPopup(`
+            <strong>${item.deskripsi}</strong><br><br>
+            <img src="${item.file}" width="200" style="border-radius:8px;">
+          `);
+        });
+      })
+      .catch(error => {
+        console.error("Gagal memuat data:", error);
+        alert("Gagal memuat titik laporan dari server.");
+      });
+  </script>
+
+</body>
+</html>

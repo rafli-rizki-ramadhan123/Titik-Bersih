@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TitikBersih - Beranda</title>
+  <style>
+    body { margin: 0; font-family: 'Segoe UI', sans-serif; }
+    .header {
+      background-color: #004d40; color: white;
+      padding: 20px; display: flex; justify-content: space-between; align-items: center;
+    }
+    .nav-links a {
+      color: white; text-decoration: none; margin-left: 20px;
+    }
+    .hero {
+      background-color: #e0f2f1;
+      background-image: url('bg.jpg');
+      background-size: cover; background-position: center;
+      padding: 60px 20px; color: white;
+      display: flex; justify-content: center; align-items: center;
+      min-height: 400px;
+    }
+    .hero-overlay {
+      background-color: rgba(0, 77, 64, 0.7);
+      padding: 40px; border-radius: 10px; max-width: 600px; width: 90%;
+    }
+    .hero-text { text-align: left; }
+    .hero-text h1 { font-size: 32px; margin-bottom: 10px; }
+    .hero-text h2 { font-size: 20px; margin-bottom: 15px; font-weight: normal; }
+    .hero-text p { font-size: 16px; line-height: 1.6; }
+    .hero button {
+      background-color: #4caf50; border: none; color: white; padding: 12px 24px;
+      margin-top: 20px; border-radius: 8px; font-size: 16px; cursor: pointer;
+    }
+    .hero button:hover { background-color: #388e3c; }
+    .features {
+      display: flex; justify-content: space-around; flex-wrap: wrap;
+      padding: 40px 20px; background-color: #f1f1f1;
+    }
+    .feature-card {
+      background: white; border-radius: 10px; padding: 20px; text-align: center;
+      width: 250px; margin: 10px; text-decoration: none; color: inherit;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .feature-card img { height: 50px; margin-bottom: 10px; }
+    .feature-card h3 { color: #00796b; }
+    footer {
+      background-color: #004d40; color: white;
+      text-align: center; padding: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <h2>TitikBersih</h2>
+    <nav class="nav-links">
+      <a href="beranda.html">Beranda</a>
+      <a href="layanan.html">Layanan</a>
+      <a href="peta.html">Peta</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-overlay">
+      <div class="hero-text">
+        <h1>Ayo Kurangi Sampah</h1>
+        <h2>230.786 TON Sampah berhasil di daur ulang!</h2>
+        <p>TitikBersih hadir sebagai solusi kolaboratif dalam menjaga lingkungan. Laporkan titik sampah dan edukasi dirimu.</p>
+        <button onclick="location.href='lapor.html'">Mulai</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <a href="lapor.html" class="feature-card">
+      <img src="https://img.icons8.com/ios-filled/50/000000/waste.png" alt="Lapor Sampah" />
+      <h3>Lapor Sampah</h3>
+      <p>Laporkan sampah liar di sekitarmu</p>
+    </a>
+    <a href="edukasi.html" class="feature-card">
+      <img src="https://img.icons8.com/ios/50/000000/broom.png" alt="Edukasi" />
+      <h3>Edukasi</h3>
+      <p>Pelajari cara kelola sampah dengan bijak</p>
+    </a>
+    <a href="peta.html" class="feature-card">
+      <img src="https://img.icons8.com/ios-glyphs/50/000000/map.png" alt="Peta" />
+      <h3>Lihat Peta</h3>
+      <p>Temukan titik-titik sampah yang sudah dilaporkan</p>
+    </a>
+  </section>
+
+  <footer>&copy; 2025 TitikBersih. Semua hak dilindungi.</footer>
+</body>
+</html>
